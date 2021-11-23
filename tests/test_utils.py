@@ -1,11 +1,12 @@
 import numpy as np
 from PIL import Image
 from tensorflow.keras.applications.nasnet import preprocess_input
-from tensorflow.keras.applications import NASNetLarge
+from tensorflow.keras.applications import NASNetMobile
 
 from app import utils
 
-model = NASNetLarge(
+# testing with NASNetMobile as it's faster
+model = NASNetMobile(
     input_shape=None,
     include_top=True,
     weights="imagenet",
