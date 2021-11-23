@@ -37,10 +37,16 @@ def process_and_predict_image(image, preprocessing_func, model, nb_decode=5):
     """Compute predictions on an image
 
     Args:
-            image: a PIL Image
+        image: a PIL Image
+        preprocessing_func: function to apply an image (np.array) before inference
+        model: a tf.keras model
+        nb_decode: number of top predictions wanted
 
     Returns:
-
+        A list of dictionaries containing the top predictions.
+            The lenght of the list is given by the nb_decode parameter.
+            The format of the dictionaries are 
+            {"id": "n01882714", "class": "koala", "probability": 0.90}
     """
     # preprocess
     shape = get_model_input_shape(model)
