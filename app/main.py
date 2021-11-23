@@ -33,7 +33,7 @@ def read_root():
 
 @app.post("/set_model/")
 def set_model(model_name):
-    """ Change model between NASNetMobile and NASNetLarge.
+    """Change model between NASNetMobile and NASNetLarge.
     In a real production setup, we want to be able to change model versions.
     So we would need to extend this idea, so that we can support any tf.keras model
     (and preprocessing).
@@ -48,7 +48,7 @@ def set_model(model_name):
         return "Unsuported model name {}. Please pick one in {}".format(
             model_name, supported_models
         )
-    if model_name == "NasNetLarge":
+    if model_name == "NASNetLarge":
         model = NASNetLarge(
             input_shape=None,
             include_top=True,
@@ -69,6 +69,16 @@ def set_model(model_name):
     return "Succesfully changed model to {}".format(model_name)
 
 
+@app.get("/get_model/")
+def get_model_desctiption():
+    """Give details on the currently used tf.keras model
+
+    Returns:
+        A dictionary {"model_name": , "nb_parameters"}
+    """
+    return {"model_name": model.name, "nb_parameters": model.count_params()}
+
+
 @app.post("/predict/")
 async def prediction(file: UploadFile = File(...)):
     """Predict what is on an image
@@ -76,7 +86,8 @@ async def prediction(file: UploadFile = File(...)):
     Args:
 
     Returns:
-                    The probabilities associated with the inference
+        The probabilities associated with the inference
+
     """
 
     # check that the file can be processed
