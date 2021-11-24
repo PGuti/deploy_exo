@@ -1,9 +1,11 @@
+import os
 import json
 from fastapi.testclient import TestClient
 from PIL import Image
 from app.main import app
 
 client = TestClient(app)
+
 
 def test_read_main():
     response = client.get("/")
@@ -27,7 +29,8 @@ def test_set_and_get_model():
 
 
 def test_prediction():
-    with open("./../images/koala.jpeg","rb") as file_image:
+    git_path = os.path.dirname(os.path.dirname(os.path.realpath(__file__)))
+    with open(os.path.join(git_path, "images", "koala.jpeg"), "rb") as file_image:
         response = client.post("/predict/", files={"file": file_image})
         predictions = json.loads(response.content)
     assert predictions[0]["class"] == "koala" and predictions[0]["probability"] > 0.85

@@ -1,3 +1,4 @@
+import os
 import numpy as np
 from PIL import Image
 from tensorflow.keras.applications.nasnet import preprocess_input
@@ -22,7 +23,8 @@ def test_get_model_input_shape():
 
 
 def test_process_and_predict_image():
-    image = Image.open("./../images/koala.jpeg")
+    git_path = os.path.dirname(os.path.dirname(os.path.realpath(__file__)))
+    image = Image.open(os.path.join(git_path, "images", "koala.jpeg"))
     prediction = utils.process_and_predict_image(
         image, preprocessing_func=preprocess_input, model=model
     )
