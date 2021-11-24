@@ -17,7 +17,8 @@ model = NASNetMobile(
 
 
 def test_get_model_input_shape():
-    assert utils.get_model_input_shape(model) == (331, 331, 3)
+    # this is for NASNetMobile only. NASNetLarge is (331, 331, 3)
+    assert utils.get_model_input_shape(model) == (224, 224, 3)
 
 
 def test_process_and_predict_image():
