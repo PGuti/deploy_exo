@@ -1,7 +1,6 @@
 import os
 import json
 from fastapi.testclient import TestClient
-from PIL import Image
 from app.main import app
 
 client = TestClient(app)
@@ -27,7 +26,7 @@ def test_set_and_get_model():
         and model_descr["nb_parameters"] == 5326716
     )
     response = client.post("/set_model/", params={"model_name": "NASNetALLISONE"})
-    assert response.status_code==422
+    assert response.status_code == 422
 
 
 def test_prediction():
@@ -36,3 +35,7 @@ def test_prediction():
         response = client.post("/predict/", files={"file": file_image})
         predictions = json.loads(response.content)
     assert predictions[0]["class"] == "koala" and predictions[0]["probability"] > 0.85
+    # test breaking .txt
+    with open(os.path.join(git_path, "images", "empty.txt"), "rb") as file_image:
+        response = client.post("/predict/", files={"file": file_image})
+    assert response.status_code == 422
