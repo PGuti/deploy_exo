@@ -70,7 +70,7 @@ def set_model(model_name):
 
 
 @app.get("/get_model/")
-def get_model_desctiption():
+def get_model_description():
     """Give details on the currently used tf.keras model
 
     Returns:
