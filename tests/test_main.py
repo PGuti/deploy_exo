@@ -26,6 +26,8 @@ def test_set_and_get_model():
         model_descr["model_name"] == "NASNet"
         and model_descr["nb_parameters"] == 5326716
     )
+    response = client.post("/set_model/", params={"model_name": "NASNetALLISONE"})
+    assert response.status_code==422
 
 
 def test_prediction():
