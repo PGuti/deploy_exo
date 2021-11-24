@@ -5,7 +5,7 @@ from fastapi import FastAPI, UploadFile, File
 from tensorflow.keras.applications.nasnet import preprocess_input
 from tensorflow.keras.applications import NASNetLarge, NASNetMobile
 
-from utils import read_imagefile, process_and_predict_image
+from app.utils import read_imagefile, process_and_predict_image
 
 app = FastAPI()
 
@@ -28,7 +28,7 @@ def read_root():
         Hello world
     """
 
-    return {"Hello": "World"}
+    return {"msg": "Hello World"}
 
 
 @app.post("/set_model/")
