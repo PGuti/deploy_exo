@@ -1,4 +1,4 @@
-from fastapi import FastAPI, UploadFile, File
+from fastapi import FastAPI, UploadFile, File, HTTPException
 
 # for now we only support NASNEtLarge and NASNetMobile
 # Supporting more models could be an improvement to be done.
@@ -45,8 +45,11 @@ def set_model(model_name):
     global model
     supported_models = ["NASNetMobile", "NASNetLarge"]
     if model_name not in supported_models:
-        return "Unsuported model name {}. Please pick one in {}".format(
-            model_name, supported_models
+        raise HTTPException(
+            status_code=422,
+            detail="Unsuported model name {}. Please pick one in {}".format(
+                model_name, supported_models
+            ),
         )
     if model_name == "NASNetLarge":
         model = NASNetLarge(
@@ -94,8 +97,11 @@ async def prediction(file: UploadFile = File(...)):
     supported_extensions = ("jpg", "jpeg", "png")
     extension = file.filename.split(".")[-1]
     if extension not in supported_extensions:
-        return "Unsuported extension of file. Please pick one in {}".format(
-            supported_extensions
+        raise HTTPException(
+            status_code=422,
+            detail="Unsuported extension of file. Please pick one in {}".format(
+                supported_extensions
+            ),
         )
     image = read_imagefile(await file.read())
     prediction = process_and_predict_image(
