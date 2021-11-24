@@ -24,11 +24,20 @@ def test_get_model_input_shape():
 
 def test_process_and_predict_image():
     git_path = os.path.dirname(os.path.dirname(os.path.realpath(__file__)))
+    
+    # test koala
     image = Image.open(os.path.join(git_path, "images", "koala.jpeg"))
     prediction = utils.process_and_predict_image(
         image, preprocessing_func=preprocess_input, model=model
     )
     assert prediction[0]["class"] == "koala" and prediction[0]["probability"] > 0.85
+
+    # test support of black and white format
+    image = Image.open(os.path.join(git_path, "images", "dentist_black_white.jpeg"))
+    prediction = utils.process_and_predict_image(
+        image, preprocessing_func=preprocess_input, model=model
+    )
+    assert prediction[0]["class"] == "gasmask" and prediction[0]["probability"] > 0.25
 
 
 def test_formatted_prediction():
