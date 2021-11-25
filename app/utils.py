@@ -8,7 +8,7 @@ def read_imagefile(file):
     """Read an uploaded image
 
     Args:
-        file:
+        file: a fastapi UploadFile
 
     Returns:
         a PIL image
@@ -18,7 +18,7 @@ def read_imagefile(file):
 
 
 def get_model_input_shape(model):
-    """Get the resolution of image the model was trained with
+    """Get the resolution/shape of the images the model was trained with
 
     Args:
         model: a tf.keras model
@@ -30,11 +30,17 @@ def get_model_input_shape(model):
 
 
 def formatted_prediction(prediction):
+    """Format keras predictions in a json serializable object
+
+    Returns:
+        a list of predictions in the format
+            {"id": , "class": , "probability": }
+    """
     return [{"id": p[0], "class": p[1], "probability": float(p[2])} for p in prediction]
 
 
 def process_and_predict_image(image, preprocessing_func, model, nb_decode=5):
-    """Compute predictions on an image
+    """Compute model predictions on an image
 
     Args:
         image: a PIL Image

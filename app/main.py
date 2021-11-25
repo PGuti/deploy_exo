@@ -77,7 +77,7 @@ def get_model_description():
     """Give details on the currently used tf.keras model
 
     Returns:
-        A dictionary {"model_name": , "nb_parameters"}
+        A dictionary {"model_name": , "nb_parameters":}
     """
     return {"model_name": model.name, "nb_parameters": model.count_params()}
 
@@ -85,8 +85,10 @@ def get_model_description():
 @app.post("/predict/")
 async def prediction(file: UploadFile = File(...)):
     """Predict what is on an image
+    Example of usage: response = client.post("/predict/", files={"file": file_image})
 
     Args:
+        file: a fastapi UploadFile.
 
     Returns:
         The probabilities associated with the inference
