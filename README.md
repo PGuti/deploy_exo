@@ -6,8 +6,13 @@ This project is based on Fastapi. It can be run manually or in a docker containe
 
 ## Running with uvicorn
 
+Start by installing the python dependencies
 
-manually run uvicorn: 
+```
+pip install -r requirements.txt
+```
+
+Manually run uvicorn: 
 ```
 cd app
 uvicorn main:app --reload
