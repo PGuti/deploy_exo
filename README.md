@@ -29,7 +29,17 @@ Once docker running, the api documentation will then be available at http://127.
 
 More info on using fast api and docker can be found here: [a fast api and docker](https://fastapi.tiangolo.com/deployment/docker/)
 
+# Tests
+
+You can run the tests using pytest on the test/ folder.
+In order to check coverage, you can use:
+```
+pytest --cov-report term-missing --cov=app tests/
+```
+Coverage should be close to 100%
+
 # Next steps & to do
+## to do
 If I have time I would like to:
 - optionally output gradcam results for the top n classes.
 
