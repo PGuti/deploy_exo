@@ -47,4 +47,4 @@ If I have time I would like to:
 There are some stuff missing from this project. 
 - There is no authentification. This means that everyone that can query the model can change the model as well, which is not what we would like in a production setup
 - The way we create the model today make import/testing super heavy. We may want to rework this part. Maybe with an "init" endpoint?
- 
+- There hasn't been any speed / load tests. 
