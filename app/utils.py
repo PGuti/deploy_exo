@@ -45,7 +45,7 @@ def process_and_predict_image(image, preprocessing_func, model, nb_decode=5):
     Returns:
         A list of dictionaries containing the top predictions.
             The lenght of the list is given by the nb_decode parameter.
-            The format of the dictionaries are 
+            The format of the dictionaries are
             {"id": "n01882714", "class": "koala", "probability": 0.90}
     """
     # preprocess
