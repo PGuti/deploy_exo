@@ -23,7 +23,9 @@ docker build -t myimage .
 docker run -d --name mycontainer -p 80:80 myimage
 ```
 
-The api documentation will then be available at http://127.0.0.1/docs
+NB: the build can take 5 minutes or more because of tensorflow installation.
+
+Once docker running, the api documentation will then be available at http://127.0.0.1/docs
 
 More info on using fast api and docker can be found here: [a fast api and docker](https://fastapi.tiangolo.com/deployment/docker/)
 
@@ -33,5 +35,6 @@ If I have time I would like to:
 
 ## Limitations:
 There are some stuff missing from this project. 
-- Typically, there is no authentification. This means that everyone that can query the model can change the model as well, which is not what we would like in a production setup
+- There is no authentification. This means that everyone that can query the model can change the model as well, which is not what we would like in a production setup
+- The way we create the model today make import/testing super heavy. We may want to rework this part. Maybe with an "init" endpoint?
  
